@@ -23,6 +23,8 @@ app.config.from_object('config')
 app.config['MONGOALCHEMY_DATABASE'] = 'smsTest'
 db = MongoAlchemy(app)
 
+MASTER_NUMBER = '16262190621'
+
 #we need to set up our own config files
 auth_id = app.config('AUTH_ID')
 auth_token = app.config('AUTH_TOKEN')
@@ -51,6 +53,13 @@ def sms():
             #entering the gateway where stuff happens!
     else:
         return "These aren't the droids you're looking for. Move along, move along."
+        
+@app.route("/cron")
+def cron():
+    users = User.query.all()
+        for user in users:
+            if user.status.timeExpired < datatime.datetime.now():
+                send_txt(user.number, "Are you alright?", src=MASTER_NUMBER):
         
 def send_txt(destination, text, src='16262190621'):
     p = plivo.RestAPI(auth_id, auth_token) # Create a Plivo API object, used when you want to write to their service
