@@ -27,6 +27,7 @@ auth_token = app.config('AUTH_TOKEN')
 #are you going to use a database? if so, what classes do we need?
 class SMS(db.Document):
     timeAnswered = db.DateTimeField()
+    action = db.StringField()
     direction = db.StringField()
     smsTo = db.StringField()
     smsType = db.StringField()
@@ -36,10 +37,13 @@ class SMS(db.Document):
 
 #what other information do we need to store about each user?
 class User(db.Document):
-    number = db.StringField()
+    number = db.ListField(db.StringField())
     status = db.StringField()
     createdAt = db.DateTimeField(required=True)
     name = db.StringField()
+    
+class Event(db.Document):
+    
 
 #this HTMLParser is good for cleaning up input from web forms if we choose to have a web component
 #we should review it though and possibly add to it based on our needs    
