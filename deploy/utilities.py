@@ -1,3 +1,5 @@
+import datetime
+
 sms = '@ mbarara university for 5'
 sms2 = '@ makere uni comp sci dept for 2'
 sms3 = '@ home'
@@ -21,7 +23,11 @@ def showlocation(msg):
 def showtime(msg):
     return msg.split('for')[-1][1:]
 
-
+def calcTime(msg):
+    time = int(msg.split('for')[-1][1:])
+    timeEntered = datetime.datetime.now()
+    timeExpired = timeEntered + datetime.timedelta(hours=time)
+    return timeExpired
 
 def showtimeandloc(msg):
     if sms[0] == '@':
