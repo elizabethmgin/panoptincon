@@ -29,10 +29,11 @@ class SMS(db.Document):
     smsText = db.StringField()
 
 class User(db.Document):
-    number = db.ListField(db.StringField())
+    number = db.StringField()
     status = db.DocumentField(Status)
     createdAt = db.DateTimeField(required=True)
     name = db.StringField()
+    isChin = db.BoolField()
     
 class Status(db.Document):
     location = db.StringField()
