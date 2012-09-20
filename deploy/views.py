@@ -24,7 +24,6 @@ db = MongoAlchemy(app)
 auth_id = app.config('AUTH_ID')
 auth_token = app.config('AUTH_TOKEN')
 
-#are you going to use a database? if so, what classes do we need?
 class SMS(db.Document):
     timeAnswered = db.DateTimeField()
     action = db.StringField()
@@ -35,15 +34,17 @@ class SMS(db.Document):
     smsFrom = db.StringField()
     smsText = db.StringField()
 
-#what other information do we need to store about each user?
 class User(db.Document):
     number = db.ListField(db.StringField())
-    status = db.StringField()
+    status = db.DocumentField(Status)
     createdAt = db.DateTimeField(required=True)
     name = db.StringField()
     
-class Event(db.Document):
-    
+class Status(db.Document):
+    location = db.StringField()
+    timeEntered = db.DateTimeField()
+    timeExpired = db.DateTimeField()
+    condition = db.StringField()
 
 #this HTMLParser is good for cleaning up input from web forms if we choose to have a web component
 #we should review it though and possibly add to it based on our needs    
