@@ -19,8 +19,9 @@ import re
 import models
 import utilities
 from HTMLParser import HTMLParser
-app = Flask(__name__)
-app.config.from_object('config')
+from panoptincon import app
+#app.config.from_object('config')
+#app.config.from_pyfile('config.py')
 app.config['MONGOALCHEMY_DATABASE'] = 'smsTest'
 db = MongoAlchemy(app)
 
@@ -56,6 +57,9 @@ def sms():
     if request.method == 'POST':
         print >> sys.stderr, "Received POST request to /plivo/sms/" # this is how you write messages to yourself in the Apache /var/log/apache2/error.log
         try:
+            print "blah"
+        except:
+            print "blah!  blah!"
             #entering the gateway where stuff happens!
     else:
         return "These aren't the droids you're looking for. Move along, move along."
@@ -63,9 +67,9 @@ def sms():
 @app.route("/cron")
 def cron():
     users = User.query.all()
-        for user in users:
-            if user.status.timeExpired < datatime.datetime.now():
-                send_txt(user.number, "Are you alright?", src=MASTER_NUMBER):
+    for user in users:
+        if user.status.timeExpired < datatime.datetime.now():
+            send_txt(user.number, "Are you alright?", src=MASTER_NUMBER)
         
 def send_txt(destination, text, src='16262190621'):
     p = plivo.RestAPI(auth_id, auth_token) # Create a Plivo API object, used when you want to write to their service
