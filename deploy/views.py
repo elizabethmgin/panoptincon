@@ -45,6 +45,11 @@ def strip_tags(html):
     s = MLStripper()
     s.feed(html)
     return s.get_data()
+
+@app.route("/")
+def welcome():
+    return "this is a test"
+    
     
 @app.route("/plivo/sms/", methods=['GET', 'POST'])
 def sms():
