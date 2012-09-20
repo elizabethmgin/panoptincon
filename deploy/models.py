@@ -28,6 +28,12 @@ class SMS(db.Document):
     smsFrom = db.StringField()
     smsText = db.StringField()
 
+class Status(db.Document):
+    location = db.StringField()
+    timeEntered = db.DateTimeField()
+    timeExpired = db.DateTimeField()
+    condition = db.StringField()
+
 class User(db.Document):
     number = db.StringField()
     status = db.DocumentField(Status)
@@ -35,8 +41,3 @@ class User(db.Document):
     name = db.StringField()
     isChin = db.BoolField()
     
-class Status(db.Document):
-    location = db.StringField()
-    timeEntered = db.DateTimeField()
-    timeExpired = db.DateTimeField()
-    condition = db.StringField()
