@@ -75,6 +75,9 @@ def sms():
                 regisUser = User.query.filter(User.number == caller).first()
                 response = showlocation(message)
                 print >> sys.stderr, newMessage
+                location = 'the village'
+                timeExpired = datetime.datetime.now() + datetime.timedelta(hours=1)
+                condition = 'uncertain'
                 newStatus = Status(location=location,timeEntered=datetime.datetime.now(),timeExpired=timeExpired,condition=condition)
                 regisUser.status = newStatus
                 regisUser.save()
