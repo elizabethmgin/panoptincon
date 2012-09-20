@@ -17,6 +17,7 @@ import plivo
 import sys
 import re
 import models
+import utilities
 from HTMLParser import HTMLParser
 app = Flask(__name__)
 app.config.from_object('config')
