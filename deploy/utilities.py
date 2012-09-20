@@ -1,8 +1,8 @@
-sms = '@ mbarara university for 5 hours'
-sms2 = '@ makere uni comp sci dept for 2 hours'
+sms = '@ mbarara university for 5'
+sms2 = '@ makere uni comp sci dept for 2'
 sms3 = '@ home'
-sms4 = '@mbarara for 7 hours'
-sms5 = '@garden city for 9 hours'
+sms4 = '@mbarara for 7'
+sms5 = '@garden city for 9'
 
 safezones = ['home',
              'unicef',
