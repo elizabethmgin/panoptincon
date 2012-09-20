@@ -1,4 +1,6 @@
 """
+views.py
+
 Created by Media Design Practices: Field at Art Center College of Design.
 Copyright (c) 2012 MDP. All rights reserved.
 Licensed under the Affero 3 GPL License
@@ -14,6 +16,7 @@ import feedparser
 import plivo
 import sys
 import re
+import models
 from HTMLParser import HTMLParser
 app = Flask(__name__)
 app.config.from_object('config')
@@ -23,28 +26,6 @@ db = MongoAlchemy(app)
 #we need to set up our own config files
 auth_id = app.config('AUTH_ID')
 auth_token = app.config('AUTH_TOKEN')
-
-class SMS(db.Document):
-    timeAnswered = db.DateTimeField()
-    action = db.StringField()
-    direction = db.StringField()
-    smsTo = db.StringField()
-    smsType = db.StringField()
-    smsMessageUUID = db.StringField()
-    smsFrom = db.StringField()
-    smsText = db.StringField()
-
-class User(db.Document):
-    number = db.ListField(db.StringField())
-    status = db.DocumentField(Status)
-    createdAt = db.DateTimeField(required=True)
-    name = db.StringField()
-    
-class Status(db.Document):
-    location = db.StringField()
-    timeEntered = db.DateTimeField()
-    timeExpired = db.DateTimeField()
-    condition = db.StringField()
 
 #this HTMLParser is good for cleaning up input from web forms if we choose to have a web component
 #we should review it though and possibly add to it based on our needs    
