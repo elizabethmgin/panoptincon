@@ -67,12 +67,13 @@ def sms():
                                 smsFrom = request.form['From'],
                                 smsText = request.form['Text'],
                                 )
-            print >> sys.stderr, s
+            print >> sys.stderr, s.direction
             s.save()
             message = request.form['Text']
             caller = request.form['From']
             regisUser = User.query.filter(User.number == caller).first()
             newMessage = showlocation(message)
+            print >> sys.stderr, newMessage
             send_txt(caller,newMessage.upper())
         except:
             print >> sys.stderr, str(sys.exc_info()[0])
