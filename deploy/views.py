@@ -19,6 +19,8 @@ import re
 import models
 import utilities
 from HTMLParser import HTMLParser
+from models import User, SMS, Status
+
 from panoptincon import app
 #app.config.from_object('config')
 #app.config.from_pyfile('config.py')
@@ -70,7 +72,8 @@ def cron():
     for user in users:
         if user.status.timeExpired < datatime.datetime.now():
             send_txt(user.number, "Are you alright?", src=MASTER_NUMBER)
-        
+    return "cron done run."
+   
 def send_txt(destination, text, src='16262190621'):
     p = plivo.RestAPI(auth_id, auth_token) # Create a Plivo API object, used when you want to write to their service
     params = { 'text':text,
