@@ -15,7 +15,6 @@ import plivo
 
 app = Flask(__name__)
 app.config.from_object('config')
-app.config['MONGOALCHEMY_DATABASE'] = 'smsTest'
 db = MongoAlchemy(app)
 
 class SMS(db.Document):
