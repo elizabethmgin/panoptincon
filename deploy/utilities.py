@@ -31,6 +31,10 @@ def showlocation(msg):
         #These check for safe zones
         elif msg[1:] in safezones:
             return msg[1:]
+        if msg[2:] in safezones:
+            return msg[2:]
+        elif msg[1:] not in safezones:
+            return "Not a recognized safe zone"
         elif msg.split()[1] in safezones:
             return msg.split()[1]
         else:
