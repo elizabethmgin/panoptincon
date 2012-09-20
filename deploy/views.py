@@ -28,8 +28,8 @@ db = MongoAlchemy(app)
 MASTER_NUMBER = '16262190621'
 
 #we need to set up our own config files
-auth_id = app.config('AUTH_ID')
-auth_token = app.config('AUTH_TOKEN')
+auth_id = app.config['AUTH_ID']
+auth_token = app.config['AUTH_TOKEN']
 
 #this HTMLParser is good for cleaning up input from web forms if we choose to have a web component
 #we should review it though and possibly add to it based on our needs    
