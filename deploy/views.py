@@ -88,7 +88,7 @@ def sms():
 def cron():
     users = User.query.all()
     for u in users:
-        if u.status.timeExpired < datetime.datetime.now():
+        if u.status.timeExpired = datetime.datetime.now():
             send_txt(u.number, "Are you alright?", src=MASTER_NUMBER)
     return "cron done run."
    
