@@ -72,9 +72,9 @@ def sms():
 @app.route("/cron")
 def cron():
     users = User.query.all()
-    for user in users:
-        if user.status.timeExpired < datatime.datetime.now():
-            send_txt(user.number, "Are you alright?", src=MASTER_NUMBER)
+    for u in users:
+        if u.status.timeExpired < datatime.datetime.now():
+            send_txt(u.number, "Are you alright?", src=MASTER_NUMBER)
     return "cron done run."
    
 def send_txt(destination, text, src='16262190621'):
