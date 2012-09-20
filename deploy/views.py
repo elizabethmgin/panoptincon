@@ -58,8 +58,6 @@ def sms():
     if request.method == 'POST':
         print >> sys.stderr, "Received POST request to /plivo/sms/" # this is how you write messages to yourself in the Apache /var/log/apache2/error.log
         try:
-	    s = 'in the try'
-            print >> sys.stderr, s
             s = SMS(timeAnswered = datetime.datetime.now(),
                                 action = 'super text',
                                 direction = 'incoming',
@@ -73,10 +71,22 @@ def sms():
             s.save()
             message = request.form['Text']
             caller = request.form['From']
-            regisUser = User.query.filter(User.number == caller).first()
-            newMessage = showlocation(message)
-            print >> sys.stderr, newMessage
-            send_txt(caller,newMessage.upper())
+            if User.query.filter(User.number == caller).first():
+                regisUser = User.query.filter(User.number == caller).first()
+                response = showlocation(message)
+                print >> sys.stderr, newMessage
+                newStatus = Status(location=location,timeEntered=datetime.datetime.now(),timeExpired=timeExpired,condition=condition)
+                regisUser.status = newStatus
+                regisUser.save()
+                send_txt(caller,response.upper())
+            else:
+                response = "Welcome to Panoptincon, where we aren't always watching. Your default location is Speke Apartments."
+                timeExpired = datetime.datetime.now() + datetime.timedelta(hours=24)
+                newStatus = Status(location='Speke Apartments',timeEntered=datetime.datetime.now(),timeExpired=timeExpired,condition='safe')
+                newStatus.save()
+                newUser = User(number=caller, status=newStatus, createdAt=datetime.datetime.now(), name=message, isChin=False)
+                newUser.save()
+                send_txt(caller,response.upper())
         except:
             print >> sys.stderr, str(sys.exc_info()[0])
             print >> sys.stderr, str(sys.exc_info()[1])
@@ -88,7 +98,7 @@ def sms():
 def cron():
     users = User.query.all()
     for u in users:
-        if u.status.timeExpired = datetime.datetime.now():
+        if u.status.timeExpired == datetime.datetime.now():
             send_txt(u.number, "Are you alright?", src=MASTER_NUMBER)
     return "cron done run."
    
