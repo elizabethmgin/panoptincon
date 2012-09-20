@@ -47,15 +47,16 @@ def showtime(msg):
         return "at safezone: " + msg.split()[1]
     else:
         return "missing a time to return by"
-
-def calcTime(msg):
-    time = int(msg.split('for')[-1][1:])
-    timeEntered = datetime.datetime.now()
-    timeExpired = timeEntered + datetime.timedelta(hours=time)
-    return timeExpired
+    
 
 def showtimeandloc(msg):
     if sms[0] == '@':
             return "location: " + showlocation(msg) + " back in: " + showtime(msg)
     else:
         return "need an @ sign"
+
+def calcTime(msg):
+    time = int(msg.split('for')[-1][1:])
+    timeEntered = datetime.datetime.now()
+    timeExpired = timeEntered + datetime.timedelta(hours=time)
+    return timeExpired
