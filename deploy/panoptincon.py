@@ -6,7 +6,7 @@ import utilities
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
-app.config['MONGOALCHEMY_DATABASE'] = 'smsTest'
+app.config['MONGOALCHEMY_DATABASE'] = 'smsTest2'
 db = MongoAlchemy(app)
 
 import views

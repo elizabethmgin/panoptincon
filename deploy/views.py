@@ -24,7 +24,6 @@ from models import User, SMS, Status
 from panoptincon import app
 #app.config.from_object('config')
 #app.config.from_pyfile('config.py')
-app.config['MONGOALCHEMY_DATABASE'] = 'smsTest'
 db = MongoAlchemy(app)
 
 MASTER_NUMBER = '16262190621'
