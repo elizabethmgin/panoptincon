@@ -58,9 +58,22 @@ def sms():
     if request.method == 'POST':
         print >> sys.stderr, "Received POST request to /plivo/sms/" # this is how you write messages to yourself in the Apache /var/log/apache2/error.log
         try:
+            s = SMS(timeAnswered = datetime.datetime.now(),
+                                action = 'super text'
+                                direction = 'incoming',
+                                smsTo = request.form['To'],
+                                smsType = request.form['Type'],
+                                smsMessageUUID = request.form['MessageUUID'],
+                                smsFrom = request.form['From'],
+                                smsText = request.form['Text'],
+                                )
+            print >> sys.stderr, s
+            s.save()
             message = request.form['Text']
             caller = request.form['From']
-            send_txt(caller,message.upper())
+            regisUser = User.query.filter(User.number == caller).first()
+            newMessage = showlocation(message)
+            send_txt(caller,newMessage.upper())
         except:
             print >> sys.stderr, str(sys.exc_info()[0])
             print >> sys.stderr, str(sys.exc_info()[1])
