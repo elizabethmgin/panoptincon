@@ -17,7 +17,7 @@ import plivo
 import sys
 import re
 import models
-from utilities import showlocation, showtime, showtimeandloc, calcTime, safezones
+from utilities import showlocation, showtime, showtimeandloc, calcTime
 from HTMLParser import HTMLParser
 from models import User, SMS, Status
 
@@ -47,6 +47,12 @@ def strip_tags(html):
     s = MLStripper()
     s.feed(html)
     return s.get_data()
+
+
+safezones = ['home',
+             'unicef',
+             'makerere'
+             ]
 
 @app.route("/")
 def welcome():
