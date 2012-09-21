@@ -74,7 +74,7 @@ def sms():
             if User.query.filter(User.number == caller).first():
                 regisUser = User.query.filter(User.number == caller).first()
                 response = showlocation(message)
-                print >> sys.stderr, newMessage
+                print >> sys.stderr, response
                 location = 'the village'
                 timeExpired = datetime.datetime.now() + datetime.timedelta(hours=1)
                 condition = 'uncertain'
