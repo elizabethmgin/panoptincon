@@ -78,7 +78,7 @@ def sms():
                     regisUser = User.query.filter(User.number == caller).first()
                     location = response['location']
                     print >> sys.stderr, location
-                    hours = response['hours']
+                    hours = int(response['hours'])
                     print >> sys.stderr, hours
                     timeExpired = datetime.datetime.now() + datetime.timedelta(hours=hours)
                     print >> sys.stderr, timeExpired
