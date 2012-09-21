@@ -49,11 +49,6 @@ def strip_tags(html):
     return s.get_data()
 
 
-safezones = ['home',
-             'unicef',
-             'makerere'
-             ]
-
 @app.route("/")
 def welcome():
     return "this is a test"

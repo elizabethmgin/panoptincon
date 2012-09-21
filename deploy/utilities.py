@@ -18,7 +18,7 @@ sms15 = '@ accd 4'
 
 
 smstestlist = [sms,sms2,sms3,sms4,sms5,sms6,sms7,sms8,sms9,sms10,sms11,sms12,sms13,sms14,sms15]
-
+    
 
 def change4tofor(msg):
     if '4' in msg:
@@ -33,6 +33,10 @@ def change4tofor(msg):
         return msg.lower()
 
 def showlocation(msg):
+    safezones = ['home',
+         'unicef',
+         'makerere'
+         ]
     if msg[0] == '@':
         #Checks if the string contains 'for', so we can do a datetime delta function.
         if 'for' in msg:
@@ -58,6 +62,10 @@ def showlocation(msg):
         return "Error: Need an @ sign"
 
 def showtime(msg):
+    safezones = ['home',
+         'unicef',
+         'makerere'
+         ]
     if 'for' in msg.lower():
         try:
             if int(msg.lower().split('for')[-1][1:]) <= 24:
