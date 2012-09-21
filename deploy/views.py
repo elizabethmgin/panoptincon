@@ -91,7 +91,7 @@ def sms():
                 elif type(response) == type(str()):
                     send_txt(caller,response.upper())
                 else:
-                    opps = 'Sorry. We are confused. Please try again.'
+                    oops = 'Sorry. We are confused. Please try again.'
                     send_txt(caller,oops.upper())
             else:
                 response = "Welcome to Panoptincon, where we aren't always watching. Your default location is Speke Apartments."
