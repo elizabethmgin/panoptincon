@@ -96,7 +96,10 @@ def showtimeandloc(msg):
         if time.split()[0] == "Error:":
             return time
         elif "safezone" in time:
-            return time
+            combo = {}
+            safezone = time.split('safezone:')[-1][1:]
+            combo = {'location':safezone,'hours':24}
+            return combo
         else:
             combo = {}
             combo = {'location':location,'hours':time}
