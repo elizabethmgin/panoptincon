@@ -19,10 +19,6 @@ sms15 = '@ accd 4'
 
 smstestlist = [sms,sms2,sms3,sms4,sms5,sms6,sms7,sms8,sms9,sms10,sms11,sms12,sms13,sms14,sms15]
 
-safezones = ['home',
-             'unicef',
-             'makerere'
-             ]
 
 def change4tofor(msg):
     if '4' in msg:
