@@ -70,18 +70,29 @@ def sms():
             print >> sys.stderr, s.direction
             s.save()
             message = request.form['Text']
+            response = showtimeandloc(message)
+            print >> sys.stderr, response
             caller = request.form['From']
             if User.query.filter(User.number == caller).first():
-                regisUser = User.query.filter(User.number == caller).first()
-                response = showlocation(message)
-                print >> sys.stderr, response
-                location = 'the village'
-                timeExpired = datetime.datetime.now() + datetime.timedelta(hours=1)
-                condition = 'uncertain'
-                newStatus = Status(location=location,timeEntered=datetime.datetime.now(),timeExpired=timeExpired,condition=condition)
-                regisUser.status = newStatus
-                regisUser.save()
-                send_txt(caller,response.upper())
+                if type(response) == type(dict()):
+                    regisUser = User.query.filter(User.number == caller).first()
+                    location = response['location']
+                    print >> sys.stderr, location
+                    hours = response['hours']
+                    print >> sys.stderr, hours
+                    timeExpired = datetime.datetime.now() + datetime.timedelta(hours=hours)
+                    print >> sys.stderr, timeExpired
+                    condition = 'safe'
+                    newStatus = Status(location=location,timeEntered=datetime.datetime.now(),timeExpired=timeExpired,condition=condition)
+                    regisUser.status = newStatus
+                    regisUser.save()
+                    yourStatus = 'Now we are watching you.'
+                    send_txt(caller,yourStatus.upper())
+                elif type(response) == type(str()):
+                    send_txt(caller,response.upper())
+                else:
+                    opps = 'Sorry. We are confused. Please try again.'
+                    send_txt(caller,oops.upper())
             else:
                 response = "Welcome to Panoptincon, where we aren't always watching. Your default location is Speke Apartments."
                 timeExpired = datetime.datetime.now() + datetime.timedelta(hours=24)
