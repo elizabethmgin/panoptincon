@@ -9,13 +9,32 @@ sms6 = '@unicef'
 sms7 = '@unicef for 3'
 sms8 = '@ garden city'
 sms9 = 'garden city'
+sms10 = '@ art center for forever'
+sms11 = '@ garden city for 26'
+sms12 = '@ art center For 12'
+sms13 = '@ art center 4 12'
+sms14 = '@ art center 4 4'
+sms15 = '@ accd 4'
 
-smstestlist = [sms,sms2,sms3,sms4,sms5,sms6,sms7,sms8,sms9]
+
+smstestlist = [sms,sms2,sms3,sms4,sms5,sms6,sms7,sms8,sms9,sms10,sms11,sms12,sms13,sms14,sms15]
 
 safezones = ['home',
              'unicef',
              'makerere'
              ]
+
+def change4tofor(msg):
+    if '4' in msg:
+        newmsg = ' '.join(msg.split()[:-2]) + " " + msg.split()[-2].replace('4','for') + " " + msg.split()[-1]
+        return newmsg
+#    elif '4' in msg.split():
+#        newmsg = ' '.join(msg.split()[:-2]) + 
+#        return msg.split()[-2].replace('4','for')
+    elif 'for' in msg.lower().split():
+        return msg.lower()
+    else:
+        return msg.lower()
 
 def showlocation(msg):
     if msg[0] == '@':
@@ -27,37 +46,63 @@ def showlocation(msg):
                 else:
                     return msg.split('for')[0].split('@')[1][0:-1]
             else:
-                return "error"
+                return "Error: Unspecified"
         #These check for safe zones
         elif msg[1:] in safezones:
             return msg[1:]
         if msg[2:] in safezones:
             return msg[2:]
         elif msg[1:] not in safezones:
-            return "Not a recognized safe zone"
+            return "Error: Not a recognized safe zone"
         elif msg.split()[1] in safezones:
             return msg.split()[1]
         else:
-            return "missing a time to return by"
+            return "Error: Missing a time to return by"
     else:
-        return "need an @ sign"
+        return "Error: Need an @ sign"
 
 def showtime(msg):
-    if 'for' in msg:
-        return msg.split('for')[-1][1:]
+    if 'for' in msg.lower():
+        try:
+            if int(msg.lower().split('for')[-1][1:]) <= 24:
+                return msg.lower().split('for')[-1][1:]
+            elif int(msg.lower().split('for')[-1][1:]) > 24:
+                return "Error: Please input a time 24 hours or less"
+            elif msg.split()[1] in safezones:
+                return "at safezone: " + msg.split()[1]
+            else:
+                return "Error: Unspecified"
+        except:
+            return "Error: Missing a time to return by"
     elif msg[1:] in safezones:
         return "at safezone: " + msg[1:]
-    elif msg.split()[1] in safezones:
-        return "at safezone: " + msg.split()[1]
+    if msg[2:] in safezones:
+        return "at safezone: " + msg[2:]
     else:
-        return "missing a time to return by"
+        return "Error: Missing a time to return by"
     
 
 def showtimeandloc(msg):
-    if sms[0] == '@':
-            return "location: " + showlocation(msg) + " back in: " + showtime(msg)
+    msg = change4tofor(msg)
+    location = showlocation(msg)
+    if location.split()[0] == "Error:":
+        return location
     else:
-        return "need an @ sign"
+        time = showtime(msg)
+        if time.split()[0] == "Error:":
+            return time
+        elif "safezone" in time:
+            return time
+        else:
+            combo = {}
+            combo = {'location':location,'hours':time}
+            return combo
+"""
+if sms[0] == '@':
+        return "location: " + showlocation(msg) + " back in: " + showtime(msg)
+else:
+    return "need an @ sign"
+"""
 
 def calcTime(msg):
     time = int(msg.split('for')[-1][1:])
