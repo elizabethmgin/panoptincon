@@ -97,11 +97,12 @@ def showtimeandloc(msg):
             combo = {}
             combo = {'location':location,'hours':time}
             return combo
-
+"""
 if sms[0] == '@':
         return "location: " + showlocation(msg) + " back in: " + showtime(msg)
 else:
     return "need an @ sign"
+"""
 
 def calcTime(msg):
     time = int(msg.split('for')[-1][1:])
