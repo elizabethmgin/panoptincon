@@ -84,6 +84,7 @@ def sms():
                     print >> sys.stderr, timeExpired
                     condition = 'safe'
                     newStatus = Status(location=location,timeEntered=datetime.datetime.now(),timeExpired=timeExpired,condition=condition)
+                    newStatus.save()
                     regisUser.status = newStatus
                     regisUser.save()
                     yourStatus = 'Now we are watching you.'
