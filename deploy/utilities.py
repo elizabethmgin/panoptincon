@@ -98,7 +98,7 @@ def showtimeandloc(msg):
         elif "safezone" in time:
             combo = {}
             safezone = time.split('safezone:')[-1][1:]
-            combo = {'location':safezone,'hours':24}
+            combo = {'location':safezone,'hours':'24'}
             return combo
         else:
             combo = {}
