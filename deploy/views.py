@@ -17,7 +17,7 @@ import plivo
 import sys
 import re
 import models
-from utilities import showlocation, showtime, showtimeandloc, calcTime
+from utilities import showlocation, showtime, showtimeandloc, calcTime, safezones
 from HTMLParser import HTMLParser
 from models import User, SMS, Status
 
