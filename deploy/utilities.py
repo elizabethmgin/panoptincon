@@ -94,7 +94,9 @@ def showtimeandloc(msg):
         elif "safezone" in time:
             return time
         else:
-            return location + time
+            combo = {}
+            combo = {'location':location,'hours':time}
+            return combo
 
 if sms[0] == '@':
         return "location: " + showlocation(msg) + " back in: " + showtime(msg)
