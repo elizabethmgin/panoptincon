@@ -87,7 +87,7 @@ def sms():
                     newStatus.save()
                     regisUser.status = newStatus
                     regisUser.save()
-                    yourStatus = 'Now we are watching you.'
+                    yourStatus = 'We know you are at ' + location + ' for ' + str(hours) + ' hours. Now we are watching you.'
                     send_txt(caller,yourStatus.upper())
                 elif type(response) == type(str()):
                     send_txt(caller,response.upper())
