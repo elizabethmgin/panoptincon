@@ -14,9 +14,10 @@ sms11 = '@ garden city for 26'
 sms12 = '@ art center For 12'
 sms13 = '@ art center 4 12'
 sms14 = '@ art center 4 4'
+sms15 = '@ accd 4'
 
 
-smstestlist = [sms,sms2,sms3,sms4,sms5,sms6,sms7,sms8,sms9,sms10,sms11,sms12,sms13,sms14]
+smstestlist = [sms,sms2,sms3,sms4,sms5,sms6,sms7,sms8,sms9,sms10,sms11,sms12,sms13,sms14,sms15]
 
 safezones = ['home',
              'unicef',
@@ -90,7 +91,7 @@ def showtimeandloc(msg):
         time = showtime(msg)
         if time.split()[0] == "Error:":
             return time
-        elif time.split()[1] == 'safezone:':
+        elif "safezone" in time:
             return time
         else:
             return location + time
