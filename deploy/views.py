@@ -71,7 +71,8 @@ def sms():
             print >> sys.stderr, s.direction
             s.save()
             message = request.form['Text']
-            response = showtimeandloc(message)
+            #response = showtimeandloc(message)
+            response = testparsing(message)
             print >> sys.stderr, response
             caller = request.form['From']
             if User.query.filter(User.number == caller).first():

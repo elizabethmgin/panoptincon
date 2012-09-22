@@ -1,23 +1,60 @@
 import datetime
 
-sms = '@ mbarara university for 5'
-sms2 = '@ makere uni comp sci dept for 2'
-sms3 = '@ home'
-sms4 = '@mbarara for 7'
-sms5 = '@garden city for 9'
-sms6 = '@unicef'
-sms7 = '@unicef for 3'
-sms8 = '@ garden city'
-sms9 = 'garden city'
-sms10 = '@ art center for forever'
-sms11 = '@ garden city for 26'
-sms12 = '@ art center For 12'
-sms13 = '@ art center 4 12'
-sms14 = '@ art center 4 4'
-sms15 = '@ accd 4'
+
+from pyparsing import Literal, Group, OneOrMore, Word, StringEnd, SkipTo, Literal, oneOf, alphas, nums
 
 
-smstestlist = [sms,sms2,sms3,sms4,sms5,sms6,sms7,sms8,sms9,sms10,sms11,sms12,sms13,sms14,sms15]
+safezones = ['home',
+      'unicef',
+      'makerere'
+      ]
+      
+smstestlist = [ '@ mbarara university for 5',
+                '@ makere uni comp sci dept for 2',
+                '@ home',
+                '@mbarara for 7',
+                '@garden city for 9',
+                '@unicef',
+                "@yomamas",
+                "@yomama's",
+                '@unicef for 3',
+                '@ garden city',
+                '@ garden city for 26',
+                '@ art center For 12',
+                '@ art center 4 12',
+                '@ art center 4 4',
+              ]
+
+
+              
+def testparsing(s):
+    update =    (Literal('@') + 
+                Group(OneOrMore(Word(alphas))) +  
+                StringEnd()) | (Literal('@') + 
+                SkipTo(oneOf("4 for For FOR")) + 
+                oneOf('4 for For FOR') + 
+                Word(nums))
+    
+    #for s in smstestlist:
+    #    print s
+    try:
+        u = update.parseString(s)
+        print u
+        if len(u) == 2:
+            u[1] = ' '.join(u[1])
+            if u[1] in safezones:
+                print "user in safezone " + u[1]
+                combo = {'location':u[1],'hours':'24'}
+                return combo
+            else:
+                print "Error: " + u[1] + " is not a safezone!"
+                return "Error: " + u[1] + " is not a safezone!"
+        else:
+            print "user at " + u[1] + " for " + u[3] + " hours."
+            combo = {'location':u[1],'hours':str(u[3])}
+            return combo
+    except:
+        print "Error: Unable to understand!"
     
 
 def change4tofor(msg):
