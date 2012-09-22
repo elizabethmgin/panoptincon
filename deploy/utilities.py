@@ -44,10 +44,14 @@ def testparsing():
                 u[1] = ' '.join(u[1])
                 if u[1] in safezones:
                     print "user in safezone " + u[1]
+                    combo = {'location':u[1],'hours':'24'}
+                    return combo
                 else:
                     print u[1] + " is not a safezone!"
             else:
                 print "user at " + u[1] + " for " + u[3] + " hours."
+                combo = {'location':u[1],'hours':str(u[3])}
+                return combo
         except:
             print "unable to understand!"
         print
