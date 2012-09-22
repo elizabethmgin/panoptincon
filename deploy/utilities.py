@@ -27,7 +27,7 @@ smstestlist = [ '@ mbarara university for 5',
 
 
               
-def testparsing():
+def testparsing(s):
     update =    (Literal('@') + 
                 Group(OneOrMore(Word(alphas))) +  
                 StringEnd()) | (Literal('@') + 
@@ -35,26 +35,26 @@ def testparsing():
                 oneOf('4 for For FOR') + 
                 Word(nums))
     
-    for s in smstestlist:
-        print s
-        try:
-            u = update.parseString(s)
-            print u
-            if len(u) == 2:
-                u[1] = ' '.join(u[1])
-                if u[1] in safezones:
-                    print "user in safezone " + u[1]
-                    combo = {'location':u[1],'hours':'24'}
-                    return combo
-                else:
-                    print u[1] + " is not a safezone!"
-            else:
-                print "user at " + u[1] + " for " + u[3] + " hours."
-                combo = {'location':u[1],'hours':str(u[3])}
+    #for s in smstestlist:
+    #    print s
+    try:
+        u = update.parseString(s)
+        print u
+        if len(u) == 2:
+            u[1] = ' '.join(u[1])
+            if u[1] in safezones:
+                print "user in safezone " + u[1]
+                combo = {'location':u[1],'hours':'24'}
                 return combo
-        except:
-            print "unable to understand!"
-        print
+            else:
+                print u[1] + " is not a safezone!"
+                return u[1] + " is not a safezone!"
+        else:
+            print "user at " + u[1] + " for " + u[3] + " hours."
+            combo = {'location':u[1],'hours':str(u[3])}
+            return combo
+    except:
+        print "unable to understand!"
     
 
 def change4tofor(msg):
