@@ -47,14 +47,14 @@ def testparsing(s):
                 combo = {'location':u[1],'hours':'24'}
                 return combo
             else:
-                print u[1] + " is not a safezone!"
-                return u[1] + " is not a safezone!"
+                print "Error: " + u[1] + " is not a safezone!"
+                return "Error: " + u[1] + " is not a safezone!"
         else:
             print "user at " + u[1] + " for " + u[3] + " hours."
             combo = {'location':u[1],'hours':str(u[3])}
             return combo
     except:
-        print "unable to understand!"
+        print "Error: Unable to understand!"
     
 
 def change4tofor(msg):
