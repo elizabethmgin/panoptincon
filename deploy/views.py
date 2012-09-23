@@ -79,7 +79,7 @@ def sms():
             #response = showtimeandloc(message)
             #Dispatcher for the various commands
             try:
-                response = sms_commands[message[0]]()
+                response = sms_commands[message[0]](message)
             except:
                 response = "This was not a valid command.  Try @,!,g, or h.  H for help."
 
