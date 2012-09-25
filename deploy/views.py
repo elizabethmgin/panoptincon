@@ -75,7 +75,7 @@ def sms():
                                 )
             print >> sys.stderr, s.direction
             s.save()
-            message = request.form['Text']
+            message = request.form['Text'].lower()
             #response = showtimeandloc(message)
             #Dispatcher for the various commands
             try:
@@ -126,7 +126,7 @@ def cron():
     print >> sys.stderr, "We are now in cron land."
     try:
         print >> sys.stderr, "We are now in try land."
-        #check_time()
+        check_time()
     except:
         print >> sys.stderr, str(sys.exc_info()[0])
         print >> sys.stderr, str(sys.exc_info()[1])

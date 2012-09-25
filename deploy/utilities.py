@@ -121,7 +121,7 @@ def check_time():
             send_txt('14845575821', alertMessage, src=MASTER_NUMBER)
             print "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + str(u.status.timeExpired)
         else:
-            print "Everyone seems safe."
+            print "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + str(u.status.timeExpired)
     return "cron done run."
 
 """
