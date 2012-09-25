@@ -123,7 +123,13 @@ def sms():
         
 @app.route("/cron")
 def cron():
-    check_time()
+    print >> sys.stderr, "We are now in cron land."
+    try:
+        print >> sys.stderr, "We are now in try land."
+        check_time()
+    except:
+        print >> sys.stderr, str(sys.exc_info()[0])
+        print >> sys.stderr, str(sys.exc_info()[1])
     return "cron done run."
 
 if __name__ == '__main__':
