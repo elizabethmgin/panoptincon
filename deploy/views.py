@@ -126,7 +126,7 @@ def cron():
     check_time()
     return "cron done run."
    
-def send_txt(destination, text, src='16262190621'):
+def send_txt(destination, text, src=MASTER_NUMBER):
     p = plivo.RestAPI(auth_id, auth_token) # Create a Plivo API object, used when you want to write to their service
     params = { 'text':text,
               'src':src,
