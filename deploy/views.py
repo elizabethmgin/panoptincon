@@ -32,6 +32,12 @@ MASTER_NUMBER = '16262190621'
 auth_id = app.config['AUTH_ID']
 auth_token = app.config['AUTH_TOKEN']
 
+commands = {'@':check_in_parsing,
+            '!':listserve_broadcast,
+            'g':group_maintenance,
+            'h':help_parsing,
+            }
+
 #this HTMLParser is good for cleaning up input from web forms if we choose to have a web component
 #we should review it though and possibly add to it based on our needs    
 class MLStripper(HTMLParser):
@@ -73,7 +79,7 @@ def sms():
             #response = showtimeandloc(message)
             #Dispatcher for the various commands
             try:
-                response = sms_commands[message[0]](message)
+                response = commands[message[0]](message)
             except:
                 response = "This was not a valid command.  Try @,!,g, or h.  H for help."
 
