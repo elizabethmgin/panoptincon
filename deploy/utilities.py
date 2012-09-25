@@ -1,5 +1,5 @@
 import datetime
-import models
+from  models import SMS, User, Status
 import plivo
 from flask import Flask
 from flaskext.mongoalchemy import MongoAlchemy
