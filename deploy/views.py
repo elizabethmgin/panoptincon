@@ -17,7 +17,7 @@ import plivo
 import sys
 import re
 import models
-from utilities import showlocation, showtime, showtimeandloc, calcTime, check_in_parsing
+from utilities import showlocation, showtime, showtimeandloc, calcTime, check_in_parsing, listserve_parsing, group_maintenance, help_parsing
 from HTMLParser import HTMLParser
 from models import User, SMS, Status
 
@@ -52,12 +52,6 @@ def strip_tags(html):
 @app.route("/")
 def welcome():
     return "this is a test"
-
-sms_commands = {'@':check_in_parsing,
-                '!':listserve_broadcast,
-                'g':group_maintenance,
-                'h':help_parsing,
-                }
     
 @app.route("/plivo/sms/", methods=['GET', 'POST'])
 def sms():
@@ -102,7 +96,7 @@ def sms():
                     yourStatus = 'We know you are at ' + location + ' for ' + str(hours) + ' hours. Now we are watching you.'
                     send_txt(caller,yourStatus.upper())
                 elif type(response) == type(str()):
-                    send_txt(caller,response.upper())
+                    send_txt(caller,response.upper(), src=MASTER_NUMBER)
                 else:
                     oops = 'Sorry. We are confused. Please try again.'
                     send_txt(caller,oops.upper())
@@ -113,7 +107,7 @@ def sms():
                 newStatus.save()
                 newUser = User(number=caller, status=newStatus, createdAt=datetime.datetime.now(), name=message, isChin=False)
                 newUser.save()
-                send_txt(caller,response.upper())
+                send_txt(caller,response.upper(), src=MASTER_NUMBER)
         except:
             print >> sys.stderr, str(sys.exc_info()[0])
             print >> sys.stderr, str(sys.exc_info()[1])
