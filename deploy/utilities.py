@@ -4,6 +4,9 @@ import plivo
 
 from pyparsing import Literal, Group, OneOrMore, Word, StringEnd, SkipTo, Literal, oneOf, alphas, nums
 
+from panoptincon import app
+db = MongoAlchemy(app)
+
 MASTER_NUMBER = '16262190621'
 
 safezones = ['home',
@@ -26,7 +29,7 @@ smstestlist = [ '@ mbarara university for 5',
                 '@ art center 4 12',
                 '@ art center 4 4',
               ]
-              
+                           
 auth_id = app.config['AUTH_ID']
 auth_token = app.config['AUTH_TOKEN']
               
