@@ -24,10 +24,14 @@ smstestlist = [ '@ mbarara university for 5',
                 '@ art center 4 12',
                 '@ art center 4 4',
               ]
-
+commands = {'@':check_in_parsing,
+            '!':listserve_broadcast,
+            'g':group_maintenance,
+            'h':help_parsing,
+            }
 
               
-def testparsing(s):
+def check_in_parsing(s):
     update =    (Literal('@') + 
                 Group(OneOrMore(Word(alphas))) +  
                 StringEnd()) | (Literal('@') + 
@@ -55,7 +59,15 @@ def testparsing(s):
             return combo
     except:
         print "Error: Unable to understand!"
+
+def listserve_broadcast(message):
+    return "No listserve functionality yet."
     
+def group_maintenance(message):
+    return "No group maintenance functionality yet."
+    
+def help_parsing(message):
+    return "No help functions yet"
 
 def change4tofor(msg):
     if '4' in msg:

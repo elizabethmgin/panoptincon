@@ -17,7 +17,7 @@ import plivo
 import sys
 import re
 import models
-from utilities import showlocation, showtime, showtimeandloc, calcTime
+from utilities import showlocation, showtime, showtimeandloc, calcTime, check_in_parsing
 from HTMLParser import HTMLParser
 from models import User, SMS, Status
 
@@ -52,7 +52,12 @@ def strip_tags(html):
 @app.route("/")
 def welcome():
     return "this is a test"
-    
+
+sms_commands = {'@':check_in_parsing,
+                '!':listserve_broadcast,
+                'g':group_maintenance,
+                'h':help_parsing,
+                }
     
 @app.route("/plivo/sms/", methods=['GET', 'POST'])
 def sms():
@@ -72,7 +77,12 @@ def sms():
             s.save()
             message = request.form['Text']
             #response = showtimeandloc(message)
-            response = testparsing(message)
+            #Dispatcher for the various commands
+            try:
+                response = sms_commands[message[0]](message)
+            except:
+                response = "This was not a valid command.  Try @,!,g, or h.  H for help."
+
             print >> sys.stderr, response
             caller = request.form['From']
             if User.query.filter(User.number == caller).first():
