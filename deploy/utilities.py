@@ -1,6 +1,8 @@
 import datetime
 import models
 import plivo
+from flask import Flask
+from flaskext.mongoalchemy import MongoAlchemy
 
 from pyparsing import Literal, Group, OneOrMore, Word, StringEnd, SkipTo, Literal, oneOf, alphas, nums
 
@@ -77,7 +79,7 @@ def group_maintenance(message):
     return "No group maintenance functionality yet."
     
 def help_parsing(message):
-    return "No help functions yet"
+    return "Syntax for checking in: @ location 4 numberofhours"
     
 commands = {'@':check_in_parsing,
             '!':listserve_broadcast,
