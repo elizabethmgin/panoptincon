@@ -109,11 +109,11 @@ def check_time():
         elif u.status.timeExpired <= datetime.datetime.now() and u.status.condition == 'alert':
             u.status.condition = 'missing'
             u.save()
-            printMessage = "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + str(u.status.timeExpired)
-            print >> sys.stderr, printMessage
             alertMessage = u.name + ' is missing!'
             send_txt(u.number, "The Panoptincon will find you!", src=MASTER_NUMBER)
             send_txt('14845575821', alertMessage, src=MASTER_NUMBER)
+            printMessage = "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + str(u.status.timeExpired)
+            print >> sys.stderr, printMessage
         else:
             send_txt('14845575821', 'All is well in your kingdom', src=MASTER_NUMBER)
     return "cron done run."
