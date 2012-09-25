@@ -114,6 +114,7 @@ def check_time():
             send_txt('14845575821', 'All is well in your kingdom', src=MASTER_NUMBER)
     return "cron done run."
 
+"""
 def change4tofor(msg):
     if '4' in msg:
         newmsg = ' '.join(msg.split()[:-2]) + " " + msg.split()[-2].replace('4','for') + " " + msg.split()[-1]
@@ -198,7 +199,7 @@ def showtimeandloc(msg):
             combo = {}
             combo = {'location':location,'hours':time}
             return combo
-"""
+
 if sms[0] == '@':
         return "location: " + showlocation(msg) + " back in: " + showtime(msg)
 else:
