@@ -6,6 +6,8 @@ from flaskext.mongoalchemy import MongoAlchemy
 
 from pyparsing import Literal, Group, OneOrMore, Word, StringEnd, SkipTo, Literal, oneOf, alphas, nums
 
+app = Flask(__name__)
+app.config.from_object('config')
 from panoptincon import app
 db = MongoAlchemy(app)
 
