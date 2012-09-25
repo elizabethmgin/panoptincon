@@ -67,7 +67,7 @@ def check_in_parsing(s):
                 return combo
             else:
                 print "Error: " + u[1] + " is not a safezone!"
-                return "Error: " + u[1] + " is not a safezone!"
+                return "Error: " + u[1] + " is not a safezone! Syntax for checking in: @ location 4 numberofhours"
         else:
             print "user at " + u[1] + " for " + u[3] + " hours."
             combo = {'location':u[1],'hours':str(u[3])}

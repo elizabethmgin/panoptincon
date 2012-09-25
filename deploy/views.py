@@ -104,7 +104,7 @@ def sms():
                 elif type(response) == type(str()):
                     send_txt(caller,response.upper(), src=MASTER_NUMBER)
                 else:
-                    oops = 'Sorry. We are confused. Please try again.'
+                    oops = 'Sorry. Please make sure you enter your status in this format: @ location 4 numberofhours.'
                     send_txt(caller,oops.upper())
             else:
                 response = "Welcome to Panoptincon, where we aren't always watching. Your default location is Speke Apartments."
