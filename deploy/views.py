@@ -130,7 +130,7 @@ def cron():
     except:
         print >> sys.stderr, str(sys.exc_info()[0])
         print >> sys.stderr, str(sys.exc_info()[1])
-    print "cron done run."
+    return "cron done run."
 
 if __name__ == '__main__':
     app.run(debug=True)
