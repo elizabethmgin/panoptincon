@@ -97,19 +97,19 @@ def check_time():
             newTime = datetime.datetime.now() + datetime.timedelta(minutes=2)
             u.status.timeExpired = newTime
             u.save()
-            print "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + u.status.timeExpired
+            print "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + str(u.status.timeExpired)
             send_txt(u.number, "Your time has expired. Please reply with a new checkin status.", src=MASTER_NUMBER)
         elif u.status.timeExpired <= datetime.datetime.now() and u.status.condition == 'uncertain':
             u.status.condition = 'alert'
             newTime = datetime.datetime.now() + datetime.timedelta(minutes=2)
             u.status.timeExpired = newTime
             u.save()
-            print "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + u.status.timeExpired
+            print "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + str(u.status.timeExpired)
             send_txt(u.number, "Your time has expired and we are about to alert EChin. Please reply with a new checkin status.", src=MASTER_NUMBER)
         elif u.status.timeExpired <= datetime.datetime.now() and u.status.condition == 'alert':
             u.status.condition = 'missing'
             u.save()
-            printMessage = "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + u.status.timeExpired
+            printMessage = "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + str(u.status.timeExpired)
             print >> sys.stderr, printMessage
             alertMessage = u.name + ' is missing!'
             send_txt(u.number, "The Panoptincon will find you!", src=MASTER_NUMBER)
