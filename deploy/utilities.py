@@ -79,7 +79,7 @@ def group_maintenance(message):
     return "No group maintenance functionality yet."
     
 def help_parsing(message):
-    return "No help functions yet"
+    return "Syntax for checking in: @ location 4 numberofhours"
     
 commands = {'@':check_in_parsing,
             '!':listserve_broadcast,
