@@ -17,7 +17,7 @@ import plivo
 import sys
 import re
 import models
-from utilities import check_in_parsing, listserve_broadcast, group_maintenance, help_parsing, check_time
+from utilities import send_txt, check_in_parsing, listserve_broadcast, group_maintenance, help_parsing, check_time
 from HTMLParser import HTMLParser
 from models import User, SMS, Status
 
@@ -125,14 +125,6 @@ def sms():
 def cron():
     check_time()
     return "cron done run."
-   
-def send_txt(destination, text, src=MASTER_NUMBER):
-    p = plivo.RestAPI(auth_id, auth_token) # Create a Plivo API object, used when you want to write to their service
-    params = { 'text':text,
-              'src':src,
-              'dst':destination,
-              }
-    p.send_message(params) # A method in the object for sending sms
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,7 +1,6 @@
 import datetime
 import models
 import plivo
-#from views import send_txt
 
 from pyparsing import Literal, Group, OneOrMore, Word, StringEnd, SkipTo, Literal, oneOf, alphas, nums
 
@@ -27,6 +26,14 @@ smstestlist = [ '@ mbarara university for 5',
                 '@ art center 4 12',
                 '@ art center 4 4',
               ]
+              
+def send_txt(destination, text, src=MASTER_NUMBER):
+    p = plivo.RestAPI(auth_id, auth_token) # Create a Plivo API object, used when you want to write to their service
+    params = { 'text':text,
+              'src':src,
+              'dst':destination,
+              }
+    p.send_message(params) # A method in the object for sending sms
               
 def check_in_parsing(s):
     update =    (Literal('@') + 
