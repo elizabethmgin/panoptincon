@@ -75,7 +75,7 @@ def sms():
                                 )
             print >> sys.stderr, s.direction
             s.save()
-            message = request.form['Text']
+            message = request.form['Text'].lower()
             #response = showtimeandloc(message)
             #Dispatcher for the various commands
             try:
