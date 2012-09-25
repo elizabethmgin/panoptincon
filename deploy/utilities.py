@@ -75,8 +75,26 @@ commands = {'@':check_in_parsing,
 def check_time():
     users = User.query.all()
     for u in users:
-        if u.status.timeExpired <= datetime.datetime.now():
+        if u.status.timeExpired <= datetime.datetime.now() and u.status.condition == 'safe':
+            u.status.condition = 'uncertain'
+            newTime = datetime.datetime.now() + datetime.timedelta(hours=2)
+            u.status.timeExpired = newTime
+            u.save()
             send_txt(u.number, "Your time has expired. Please reply with a new checkin status.", src=MASTER_NUMBER)
+        elif u.status.timeExpired <= datetime.datetime.now() and u.status.condition == 'uncertain':
+            u.status.condition = 'alert'
+            newTime = datetime.datetime.now() + datetime.timedelta(minutes=10)
+            u.status.timeExpired = newTime
+            u.save()
+            send_txt(u.number, "Your time has expired and we are about to alert EChin. Please reply with a new checkin status.", src=MASTER_NUMBER)
+        elif u.status.timeExpired <= datetime.datetime.now() and u.status.condition == 'alert':
+            u.status.condition = 'missing'
+            u.save()
+            alertMessage = u.name + ' is missing!'
+            send_txt(u.number, "The Panoptincon will find you!", src=MASTER_NUMBER)
+            send_txt('14845575821', alertMessage, src=MASTER_NUMBER)
+        else:
+            send_txt('14845575821', 'All is well in your kingdom', src=MASTER_NUMBER)
     return "cron done run."
 
 def change4tofor(msg):
