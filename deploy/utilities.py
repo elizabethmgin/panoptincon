@@ -1,8 +1,11 @@
 import datetime
-
+import models
+import plivo
+from views import send_txt
 
 from pyparsing import Literal, Group, OneOrMore, Word, StringEnd, SkipTo, Literal, oneOf, alphas, nums
 
+MASTER_NUMBER = '16262190621'
 
 safezones = ['home',
       'unicef',
@@ -68,6 +71,13 @@ commands = {'@':check_in_parsing,
             'g':group_maintenance,
             'h':help_parsing,
             }
+            
+def check_time():
+    users = User.query.all()
+    for u in users:
+        if u.status.timeExpired <= datetime.datetime.now():
+            send_txt(u.number, "Your time has expired. Please reply with a new checkin status.", src=MASTER_NUMBER)
+    return "cron done run."
 
 def change4tofor(msg):
     if '4' in msg:

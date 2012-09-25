@@ -17,7 +17,7 @@ import plivo
 import sys
 import re
 import models
-from utilities import showlocation, showtime, showtimeandloc, calcTime, check_in_parsing, listserve_broadcast, group_maintenance, help_parsing
+from utilities import showlocation, showtime, showtimeandloc, calcTime, check_in_parsing, listserve_broadcast, group_maintenance, help_parsing, check_time
 from HTMLParser import HTMLParser
 from models import User, SMS, Status
 
@@ -123,10 +123,7 @@ def sms():
         
 @app.route("/cron")
 def cron():
-    users = User.query.all()
-    for u in users:
-        if u.status.timeExpired == datetime.datetime.now():
-            send_txt(u.number, "Are you alright?", src=MASTER_NUMBER)
+    check_time()
     return "cron done run."
    
 def send_txt(destination, text, src='16262190621'):
