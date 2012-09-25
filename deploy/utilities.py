@@ -27,6 +27,9 @@ smstestlist = [ '@ mbarara university for 5',
                 '@ art center 4 4',
               ]
               
+auth_id = app.config['AUTH_ID']
+auth_token = app.config['AUTH_TOKEN']
+              
 def send_txt(destination, text, src=MASTER_NUMBER):
     p = plivo.RestAPI(auth_id, auth_token) # Create a Plivo API object, used when you want to write to their service
     params = { 'text':text,
