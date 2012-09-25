@@ -1,7 +1,7 @@
 import datetime
 import models
 import plivo
-from views import send_txt
+#from views import send_txt
 
 from pyparsing import Literal, Group, OneOrMore, Word, StringEnd, SkipTo, Literal, oneOf, alphas, nums
 
