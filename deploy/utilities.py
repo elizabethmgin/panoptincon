@@ -118,7 +118,7 @@ def check_time():
         elif u.status.condition == 'missing':
             alertMessage = u.name + ' is still missing!'
             send_txt(u.number, "The Panoptincon is still searching for you! Check in!", src=MASTER_NUMBER)
-            send_txt('14845575821', alertMessage, src=MASTER_NUMBER)
+            #send_txt('14845575821', alertMessage, src=MASTER_NUMBER)
             print "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + str(u.status.timeExpired)
         else:
             print "Name: " + u.name + " Status: " + u.status.condition + " Location: " + u.status.location + " Time Expired: " + str(u.status.timeExpired)
